@@ -1,24 +1,34 @@
-const mongoose = require('mongoose');
+require('./db');
+const Blog = require('./Model');
 
-
-const tabeladb = new mongoose.Schema({
-    id:ObjectId,
-    title:String,
-    description: String,
-    price:Number
-});
-
-
-module.exports.main = async (args) => {
-    
-        try {
-            const createdProduct= await tabeladb (req.body);
-            console.log(createdProduct);
-            return res.status(200).json(createdProduct);
-        } catch (error) {
-            console.log(error);
-            return res.status(404);
+// args -> query strings
+// https://aicury.com/?title=Titulo&description='Isso é uma descrição'
+const main = async (args) => {
+    try {
+        // args.title -> 'Titulo'
+        // args.description -> 'Isso é uma descrição'
+        const { title, description } = args;
+        const createdProduct = await Blog.create({
+            title,
+            description,
+        });
+        return {
+            statusCode: 201,
+            body: {
+                success: true,
+                product: createdProduct,
+            }
         }
-    };
+    } catch (error) {
+        console.log(error);
+        return { body: { success: false } };
+    }
+};
 
+// (async () => {
+//    const blog = await main({ title: 'Titulo', description: 'Descrição' });
+//    console.log(blog);
+// })()
+
+module.exports.main = main;
 
