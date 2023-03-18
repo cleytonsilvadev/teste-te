@@ -1,7 +1,7 @@
 environment: 
   DB_URI: "${DB_URI}"
 packages:
-    - name: packages
+    - name: CRUD
       shared: false
       environment: {}
       parameters: {}
