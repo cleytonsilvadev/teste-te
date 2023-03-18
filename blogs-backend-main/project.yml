@@ -1,0 +1,21 @@
+environment: 
+  DB_URI: "${DB_URI}"
+packages:
+  - name: blogs
+    actions: 
+      - name: createBlogs
+        limits:
+          timeout: 5000
+          memory: 256
+      - name: getBlogs
+        limits:
+          timeout: 5000
+          memory: 256
+      - name: updateBlogs
+        limits:
+          timeout: 5000
+          memory: 256
+      - name: deleteBlogs
+        limits:
+          timeout: 5000
+          memory: 256
